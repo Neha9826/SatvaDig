@@ -1,59 +1,180 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SatvaDig
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern service-oriented website built with Laravel 12, Inertia.js, and React. The project combines a public-facing consultancy/business website with dynamic content, lead capture, authentication, user profiles, and a protected dashboard.
 
-## About Laravel
+## Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+SatvaDig uses Laravel for the backend and Inertia.js + React for the frontend experience.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The homepage is data-driven rather than being a static landing page: active services, recent testimonials, and published blog posts are loaded from the backend and passed into the React page.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+### Public website
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- Dynamic homepage
+- About page
+- Consultancy/services page
+- Contact page
+- Services displayed from active database records
+- Latest active testimonials
+- Latest published blog posts
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Lead capture
 
-## Laravel Sponsors
+- Contact/lead submission endpoint
+- Dedicated Laravel controller for storing leads
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Authentication & user area
 
-### Premium Partners
+- Laravel authentication flow
+- Protected, verified dashboard
+- User profile editing
+- Profile update and account deletion
+- Laravel Sanctum support for API authentication
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Administration
 
-## Contributing
+The project includes Filament for administration and content-management capabilities.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Tech Stack
 
-## Code of Conduct
+**Backend**
+- PHP 8.2+
+- Laravel 12
+- Eloquent ORM
+- Laravel Sanctum
+- Laravel Breeze
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Frontend**
+- React 18
+- Inertia.js 2
+- Vite 7
+- Tailwind CSS
+- Headless UI
+- Framer Motion
 
-## Security Vulnerabilities
+**Developer tooling**
+- Axios
+- Ziggy
+- PHPUnit
+- Laravel Pint
+- Laravel Sail
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Architecture
+
+The application follows a Laravel + Inertia architecture:
+
+```text
+Browser
+   ↓
+React UI
+   ↓
+Inertia.js
+   ↓
+Laravel routes/controllers
+   ↓
+Eloquent models
+   ↓
+Database
+```
+
+The homepage demonstrates the data flow clearly: Laravel queries active services, active testimonials, and published blogs, then renders the `Welcome` React page with that server-provided data.
+
+## Repository Structure
+
+```text
+app/
+  Http/Controllers/    # Leads, profiles and application controllers
+  Models/              # Services, testimonials, blogs and other domain models
+
+resources/
+  js/                  # React/Inertia application
+  views/               # Laravel/Inertia server views
+
+routes/
+  web.php              # Public, authenticated and lead routes
+  auth.php             # Authentication routes
+
+database/
+  migrations/
+  seeders/
+  factories/
+
+public/
+  # Public assets
+
+tests/
+  # Application tests
+```
+
+## Getting Started
+
+### Requirements
+
+- PHP 8.2+
+- Composer
+- Node.js and npm
+- A database supported by Laravel
+
+### Installation
+
+```bash
+git clone https://github.com/Neha9826/SatvaDig.git
+cd SatvaDig
+
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+
+npm install
+npm run build
+```
+
+Configure database and other application values in `.env`.
+
+### Development
+
+The repository provides a Composer development workflow for running Laravel, the queue listener, application logs, and Vite together:
+
+```bash
+composer run dev
+```
+
+For frontend-only Vite development:
+
+```bash
+npm run dev
+```
+
+### Tests
+
+```bash
+composer test
+```
+
+## Engineering Highlights
+
+- Laravel + Inertia architecture with React
+- Server-driven page data through Inertia
+- Dynamic service, testimonial, and blog content
+- Protected and verified dashboard
+- Profile lifecycle management
+- Lead capture through a dedicated controller
+- Filament administration support
+- Motion-rich React UI using Framer Motion
+- Vite-based frontend build pipeline
+
+## Project Status
+
+Active web application project with a modern Laravel/React architecture.
+
+## Author
+
+**Neha Pattnayak**  
+Full Stack Engineer
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is proprietary unless otherwise specified by the repository owner.
