@@ -25,7 +25,7 @@
     "dependencies": {
         "@imgly/background-removal-node": "^1.4.5",
         "clsx": "^2.1.1",
-        "framer-motion": "^12.23.26",
+        "framer-motion": "^14.0.0",
         "tailwind-merge": "^3.4.0"
     }
 }
