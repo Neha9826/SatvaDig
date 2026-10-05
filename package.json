@@ -7,7 +7,7 @@
         "dev": "vite"
     },
     "devDependencies": {
-        "@headlessui/react": "^2.0.0",
+        "@headlessui/react": "^2.2.10",
         "@inertiajs/react": "^2.0.0",
         "@tailwindcss/forms": "^0.5.3",
         "@tailwindcss/vite": "^4.0.0",
